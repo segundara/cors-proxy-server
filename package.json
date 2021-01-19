@@ -1,0 +1,32 @@
+{
+  "name": "cors-proxy-server",
+  "version": "1.0.0",
+  "description": "apply a (Access-Control-Allow-Origin: *) header to response from API's where cors are enabled",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config ./src/server.js",
+    "debug": "nodemon --inspect -r dotenv/config ./src/server.js",
+    "start": "node ./src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/segundara/cors-proxy-server.git"
+  },
+  "author": "segundara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/segundara/cors-proxy-server/issues"
+  },
+  "homepage": "https://github.com/segundara/cors-proxy-server#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^5.0.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
