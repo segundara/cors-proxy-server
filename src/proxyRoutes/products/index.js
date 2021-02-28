@@ -1,21 +1,20 @@
 const express = require('express');
-const request = require('request');
+const axios = require('axios');
 
 const productRouter = express.Router();
 
 const targetUrl = process.env.API_URL
 
-productRouter.get('/:category', (req, res) => {
+productRouter.get('/:category', async (req, res) => {
     const category = req.params.category;
-    request(
-        { url: `${targetUrl}/products/${category}` },
-        (error, response, body) => {
-            if (error || response.statusCode !== 200) {
-                return res.status(500).json({ type: 'error', message: err.message });
-            }
-            res.json(JSON.parse(body));
-        }
-    )
+    const url = `${targetUrl}/products/${category}`;
+    try {
+        const output = await axios.get(url);
+        console.log(output.data)
+        res.status(200).send(output.data);
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 module.exports = productRouter;

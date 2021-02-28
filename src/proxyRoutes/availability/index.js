@@ -1,21 +1,20 @@
 const express = require('express');
-const request = require('request');
+const axios = require('axios');
 
 const availabilityRouter = express.Router();
 
 const targetUrl = process.env.API_URL
 
-availabilityRouter.get('/:manufacturer', (req, res) => {
+availabilityRouter.get('/:manufacturer', async (req, res) => {
     const manufacturer = req.params.manufacturer;
-    request(
-        { url: `${targetUrl}/availability/${manufacturer}` },
-        (error, response, body) => {
-            if (error || response.statusCode !== 200) {
-                return res.status(500).json({ type: 'error', message: err.message });
-            }
-            res.json(JSON.parse(body));
-        }
-    )
+    const url = `${targetUrl}/availability/${manufacturer}`;
+    try {
+        const output = await axios.get(url);
+        console.log(output.data)
+        res.status(200).send(output.data);
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 module.exports = availabilityRouter;
